@@ -1,6 +1,8 @@
 import axios from "axios";
 import React from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import SportsQuestions from "./SportsQuestions";
+import HistoryQuestions from "./HistoryQuestions";
 
 class App extends React.Component {
 	state = {
@@ -8,8 +10,14 @@ class App extends React.Component {
 		sportsCorrectAnswers: [],
 		sportsIncorrectAnswers: [],
 		entertainmentQuestions: [],
+		entertainmentCorrectAnswers: [],
+		entertainmentIncorrectAnswers: [],
 		historyQuestions: [],
-		geographyQuestions: []
+		historyCorrectAnswers: [],
+		historyIncorrectAnswers: [],
+		geographyQuestions: [],
+		geographyCorrectAnswers: [],
+		geographyIncorrectAnswers: []
 	};
 
 	componentDidMount() {
@@ -39,11 +47,6 @@ class App extends React.Component {
 					}
 				}
 			});
-
-		console.log(this.state.sportsIncorrectAnswers);
-		console.log(this.state.sportsCorrectAnswers);
-		console.log(this.state.sportsQuestions);
-
 		//Get History Questions
 		axios
 			.get(
@@ -51,7 +54,23 @@ class App extends React.Component {
 				{}
 			)
 			.then((response) => {
-				this.setState({ historyQuestions: response.data.results });
+				for (let i = 0; i < response.data.results.length; i++) {
+					this.state.historyQuestions.push(
+						response.data.results[i]["question"]
+					);
+					this.state.historyCorrectAnswers.push(
+						response.data.results[i]["correct_answer"]
+					);
+					for (
+						let j = 0;
+						j < response.data.results[i]["incorrect_answers"].length;
+						j++
+					) {
+						this.state.historyIncorrectAnswers.push(
+							response.data.results[i]["incorrect_answers"][j]
+						);
+					}
+				}
 			});
 
 		//Get Entertainment:Film Questions
@@ -61,7 +80,23 @@ class App extends React.Component {
 				{}
 			)
 			.then((response) => {
-				this.setState({ entertainmentQuestions: response.data.results });
+				for (let i = 0; i < response.data.results.length; i++) {
+					this.state.entertainmentQuestions.push(
+						response.data.results[i]["question"]
+					);
+					this.state.entertainmentCorrectAnswers.push(
+						response.data.results[i]["correct_answer"]
+					);
+					for (
+						let j = 0;
+						j < response.data.results[i]["incorrect_answers"].length;
+						j++
+					) {
+						this.state.entertainmentIncorrectAnswers.push(
+							response.data.results[i]["incorrect_answers"][j]
+						);
+					}
+				}
 			});
 
 		//Get Geography Questions
@@ -82,6 +117,11 @@ class App extends React.Component {
 					sportsQuestions={this.state.sportsQuestions}
 					sportsCorrectAnswers={this.state.sportsCorrectAnswers}
 					sportsIncorrectAnswers={this.state.sportsIncorrectAnswers}
+				/>
+				<HistoryQuestions 
+					historyQuestions={this.state.historyQuestions}
+					historyCorrectAnswers={this.state.historyCorrectAnswers}
+					historyIncorrectAnswers={this.state.historyIncorrectAnswers}
 				/>
 			</div>
 		);

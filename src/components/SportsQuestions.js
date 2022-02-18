@@ -1,6 +1,7 @@
 import React from "react";
 import RenderQuestion from "./RenderQuestion";
 import RenderAnswers from "./RenderAnswers";
+import QuestionAnswerDuo from "./QuestionAnswerDuo";
 
 class SportsQuestions extends React.Component {
 	state = {};
@@ -8,8 +9,8 @@ class SportsQuestions extends React.Component {
 	render() {
 		return (
 			<div>
-				<RenderQuestion questions={this.props.sportsQuestions} />
-				<RenderAnswers
+				<QuestionAnswerDuo
+					questions={this.props.sportsQuestions}
 					incorrectAnswers={this.props.sportsIncorrectAnswers}
 					correctAnswers={this.props.sportsCorrectAnswers}
 				/>
