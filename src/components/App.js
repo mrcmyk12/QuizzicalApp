@@ -3,6 +3,7 @@ import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import SportsQuestions from "./SportsQuestions";
 import HistoryQuestions from "./HistoryQuestions";
+import EntertainmentQuestions from "./EntertainmentQuestions";
 
 class App extends React.Component {
 	state = {
@@ -122,6 +123,11 @@ class App extends React.Component {
 					historyQuestions={this.state.historyQuestions}
 					historyCorrectAnswers={this.state.historyCorrectAnswers}
 					historyIncorrectAnswers={this.state.historyIncorrectAnswers}
+				/>
+				<EntertainmentQuestions 
+					entertainmentQuestions={this.state.entertainmentQuestions}
+					entertainmentCorrectAnswers={this.state.entertainmentCorrectAnswers}
+					entertainmentIncorrectAnswers={this.state.entertainmentIncorrectAnswers}
 				/>
 			</div>
 		);
